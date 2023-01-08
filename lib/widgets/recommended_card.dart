@@ -11,8 +11,6 @@ class RecommendCard extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  get clr_white => null;
-
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -24,7 +22,7 @@ class RecommendCard extends StatelessWidget {
           height: 250,
           width: 200,
           decoration: BoxDecoration(
-            color: clr_white,
+            color: clr_skyblue,
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -43,30 +41,25 @@ class RecommendCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 8,
+                height: 10,
               ),
               Text(
                 placeInfo.name,
                 style: const TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w700,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(
                 height: 8,
               ),
               Row(
-                children: [
-                  const Icon(
-                    Icons.location_on,
+                children: const [
+                  Icon(
+                    Icons.star,
                     color: kPrimaryClr,
                   ),
-                  Text(
-                    placeInfo.location,
-                    style: const TextStyle(
-                      color: Colors.grey,
-                    ),
-                  )
                 ],
               )
             ]),

@@ -17,7 +17,7 @@ class _homeScreenState extends State<homeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: clr_white,
+      backgroundColor: clr_incheonblue,
       /*bottomNavigationBar: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
@@ -64,14 +64,14 @@ class _homeScreenState extends State<homeScreen> {
                     ),
                     RichText(
                       text: const TextSpan(
-                          text: "Hello",
+                          text: "안녕하세요",
                           style: TextStyle(
-                            color: clr_black,
+                            color: clr_white,
                             fontSize: 18,
                           ),
                           children: [
                             TextSpan(
-                              text: ' Harold',
+                              text: '  사용자님',
                               style: TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 18,
@@ -86,10 +86,11 @@ class _homeScreenState extends State<homeScreen> {
                 ),
                 //search Section
                 const Text(
-                  "Explore Islands",
+                  "인천 섬 투어",
                   style: TextStyle(
                     fontSize: 30,
                     fontWeight: FontWeight.w700,
+                    color: clr_white,
                   ),
                 ),
                 const SizedBox(
@@ -100,7 +101,7 @@ class _homeScreenState extends State<homeScreen> {
                   borderRadius: BorderRadius.circular(100),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: clr_white,
+                      color: clr_skyblue,
                       borderRadius: BorderRadius.circular(100),
                     ),
                     child: Padding(
@@ -113,8 +114,16 @@ class _homeScreenState extends State<homeScreen> {
                           Expanded(
                             child: TextFormField(
                               decoration: const InputDecoration(
-                                hintText: "Search Islands of Incheon",
-                                prefixIcon: Icon(Icons.search_rounded),
+                                hintStyle: TextStyle(
+                                  color: clr_white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                                hintText: "검색",
+                                prefixIcon: Icon(
+                                  Icons.search_rounded,
+                                  color: clr_white,
+                                ),
                                 enabledBorder: InputBorder.none,
                                 focusedBorder: InputBorder.none,
                               ),
@@ -141,10 +150,11 @@ class _homeScreenState extends State<homeScreen> {
                 Row(
                   children: const [
                     Text(
-                      'Category',
+                      '기능 선택',
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
+                        color: clr_white,
                       ),
                     ),
                   ],
@@ -161,17 +171,17 @@ class _homeScreenState extends State<homeScreen> {
                         children: [
                           category_card(
                             title: "QR CODE",
-                            image: "assets/image/baekryung.jpeg",
+                            image: "assets/image/qrscan.jpg",
                             press: () {},
                           ),
                           category_card(
                             title: "랭킹",
-                            image: "assets/image/baekryung.jpeg",
+                            image: "assets/image/ranking.png",
                             press: () {},
                           ),
                           category_card(
                             title: "서약서",
-                            image: "assets/image/baekryung.jpeg",
+                            image: "assets/image/contract.jpg",
                             press: () {},
                           ),
                         ],
@@ -187,16 +197,14 @@ class _homeScreenState extends State<homeScreen> {
                 Row(
                   children: const [
                     Text(
-                      'Recommended',
+                      '인천의 섬',
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
+                        color: clr_white,
                       ),
                     ),
                   ],
-                ),
-                const SizedBox(
-                  height: 15,
                 ),
                 SizedBox(
                     height: 350,

@@ -51,8 +51,8 @@ class _detailScreenState extends State<detailScreen> {
                                     color: kPrimaryClr, shape: BoxShape.circle),
                                 child: const Center(
                                   child: Icon(
-                                    Icons.arrow_back_ios,
-                                    color: clr_white,
+                                    Icons.arrow_back,
+                                    color: clr_black,
                                     size: 16,
                                   ),
                                 ),
@@ -124,7 +124,7 @@ class _detailScreenState extends State<detailScreen> {
                                   child: const Text(
                                     '서약서',
                                     style: TextStyle(
-                                      color: clr_white,
+                                      color: clr_black,
                                       fontSize: 25,
                                       fontWeight: FontWeight.w700,
                                     ),
@@ -134,7 +134,7 @@ class _detailScreenState extends State<detailScreen> {
                                   height: 15,
                                 ),
                                 const Text(
-                                  "Details:",
+                                  "섬 설명:",
                                   style: TextStyle(
                                     color: clr_black,
                                     fontSize: 20,
@@ -162,7 +162,7 @@ class _detailScreenState extends State<detailScreen> {
                                 Row(
                                   children: [
                                     const Text(
-                                      'Duration',
+                                      '추천 섬 채류일',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 20,
@@ -184,7 +184,7 @@ class _detailScreenState extends State<detailScreen> {
                                 Row(
                                   children: [
                                     const Text(
-                                      'Ship Time',
+                                      '도착 소요 시간',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 20,
