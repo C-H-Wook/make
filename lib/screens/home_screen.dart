@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:makertone_proto_one/model/place_models.dart';
 import 'package:makertone_proto_one/screens/detailscreen.dart';
+import 'package:makertone_proto_one/screens/qrscan.dart';
 import 'package:makertone_proto_one/utilities/color.dart';
 import 'package:makertone_proto_one/widgets/category_card.dart';
 
@@ -172,7 +173,13 @@ class _homeScreenState extends State<homeScreen> {
                           category_card(
                             title: "QR CODE",
                             image: "assets/image/qrscan.jpg",
-                            press: () {},
+                            press: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => qrscan(),
+                                  ));
+                            },
                           ),
                           category_card(
                             title: "랭킹",

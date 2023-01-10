@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makertone_proto_one/model/place_models.dart';
+import 'package:makertone_proto_one/screens/contractList.dart';
 import 'package:makertone_proto_one/utilities/color.dart';
 
 class detailScreen extends StatefulWidget {
@@ -120,7 +121,13 @@ class _detailScreenState extends State<detailScreen> {
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(100),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: ((context) =>
+                                                const contractList())));
+                                  },
                                   child: const Text(
                                     '서약서',
                                     style: TextStyle(
