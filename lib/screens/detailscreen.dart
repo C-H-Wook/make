@@ -114,26 +114,40 @@ class _detailScreenState extends State<detailScreen> {
                                 const SizedBox(
                                   height: 8,
                                 ),
-                                MaterialButton(
-                                  color: kPrimaryClr,
-                                  minWidth: double.infinity,
-                                  height: 45,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(100),
-                                  ),
-                                  onPressed: () {
+                                GestureDetector(
+                                  onTap: () {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: ((context) =>
-                                                const contractList())));
+                                          builder: ((context) => contractList(
+                                              placeInfo: widget.placeInfo)),
+                                          fullscreenDialog: true,
+                                        ));
                                   },
-                                  child: const Text(
-                                    '서약서',
-                                    style: TextStyle(
-                                      color: clr_black,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w700,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(50),
+                                        color: kPrimaryClr,
+                                      ),
+                                      width: double.infinity,
+                                      height: 75,
+                                      child: Column(
+                                        children: const [
+                                          SizedBox(
+                                            height: 25,
+                                          ),
+                                          Text(
+                                            '서약서',
+                                            style: TextStyle(
+                                              color: clr_black,
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 ),
