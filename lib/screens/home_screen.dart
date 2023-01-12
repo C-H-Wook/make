@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:makertone_proto_one/model/place_models.dart';
 import 'package:makertone_proto_one/screens/detailscreen.dart';
+import 'package:makertone_proto_one/screens/profile_screen.dart';
 import 'package:makertone_proto_one/screens/qrscan.dart';
 import 'package:makertone_proto_one/screens/rank_screens.dart';
 import 'package:makertone_proto_one/utilities/color.dart';
@@ -49,10 +50,13 @@ class _homeScreenState extends State<homeScreen> {
           text: 'Profile',
           onPressed: () => {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => qrscan(),
-                ))
+              context,
+              MaterialPageRoute(
+                builder: (context) => profileScreen(
+                  userID: widget.userID,
+                ),
+              ),
+            )
           },
         ),
       ]),
@@ -81,23 +85,6 @@ class _homeScreenState extends State<homeScreen> {
                     const SizedBox(
                       width: 15,
                     ),
-                    RichText(
-                      text: TextSpan(
-                          text: "안녕하세요\n",
-                          style: const TextStyle(
-                            color: clr_black,
-                            fontSize: 18,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: widget.userID,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 18,
-                              ),
-                            )
-                          ]),
-                    )
                   ],
                 ),
                 const SizedBox(
@@ -175,7 +162,9 @@ class _homeScreenState extends State<homeScreen> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => detailScreen(
-                                            placeInfo: places[index])));
+                                              placeInfo: places[index],
+                                              userId: widget.userID,
+                                            )));
                               },
                             ),
                           ],

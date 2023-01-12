@@ -5,9 +5,11 @@ import 'package:makertone_proto_one/utilities/color.dart';
 
 class detailScreen extends StatefulWidget {
   final PlaceInfo placeInfo;
+  final String userId;
   const detailScreen({
     super.key,
     required this.placeInfo,
+    required this.userId,
   });
 
   @override
@@ -120,7 +122,9 @@ class _detailScreenState extends State<detailScreen> {
                                         context,
                                         MaterialPageRoute(
                                           builder: ((context) => contractList(
-                                              placeInfo: widget.placeInfo)),
+                                                placeInfo: widget.placeInfo,
+                                                userId: widget.userId,
+                                              )),
                                           fullscreenDialog: true,
                                         ));
                                   },

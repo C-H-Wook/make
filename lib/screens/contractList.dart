@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:makertone_proto_one/model/place_models.dart';
 import 'package:makertone_proto_one/utilities/color.dart';
 
 class contractList extends StatefulWidget {
   final PlaceInfo placeInfo;
+  final String userId;
 
   const contractList({
     super.key,
     required this.placeInfo,
+    required this.userId,
   });
 
   @override
@@ -16,6 +19,33 @@ class contractList extends StatefulWidget {
 }
 
 class _contractListState extends State<contractList> {
+  TextEditingController userIdController = TextEditingController();
+  TextEditingController islandIdController = TextEditingController();
+  final String baseUrl = "http://54.83.101.17:8080";
+  final String getInfo = "users";
+  final String postInfo = "users/addpleges";
+
+  Future<void> islandCheck() async {
+    try {
+      final response = await http
+          .post(Uri.parse('http://54.83.101.17:8080/users/qrcounts'), body: {
+        'user_id': widget.userId,
+        'island_id': widget.placeInfo.id,
+      });
+      print(response.statusCode);
+
+      if (response.statusCode == 200 || response.statusCode == 302) {
+        //var data = jsonDecode(response.body.toString());
+        //print(data['token']);
+        print('Login successfully');
+      } else {
+        print('failed');
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,8 +103,7 @@ class _contractListState extends State<contractList> {
     ),
     GestureDetector(
       onTap: () {
-        var contractCnt = 1;
-        print(contractCnt);
+        islandCheck();
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
