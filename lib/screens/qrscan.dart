@@ -13,12 +13,12 @@ class qrscan extends StatefulWidget {
 
 class _qrscanState extends State<qrscan> {
   String _scanQR = 'Unknown';
-  bool scan = false;
+  bool isScanned = false;
 
   @override
   void initState() {
     super.initState();
-    scan = false;
+    isScanned = false;
   }
 
   TextEditingController emailController = TextEditingController();
@@ -123,117 +123,158 @@ class _qrscanState extends State<qrscan> {
           ),
           backgroundColor: clr_white,
         ),
-        body: Column(
-          children: [
-            const SizedBox(height: 220),
-            Builder(
-              builder: (BuildContext context) {
-                return Container(
-                  decoration: const BoxDecoration(
-                    color: clr_white,
-                  ),
-                  alignment: Alignment.center,
-                  child: Flex(
-                    direction: Axis.vertical,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      SizedBox(
-                        width: 200,
-                        height: 100,
-                        child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              elevation: 0,
-                              backgroundColor: clr_white,
-                            ),
-                            onPressed: () {
-                              scan = true;
-                              scanQR();
-                            },
-                            child: Row(
-                              children: const [
-                                Icon(
-                                  Icons.qr_code_scanner_rounded,
-                                  color: clr_black,
-                                ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                Text(
-                                  'QR 스캔',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: clr_black,
-                                    fontWeight: FontWeight.w700,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 220),
+              Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                    decoration: const BoxDecoration(
+                      color: clr_white,
+                    ),
+                    alignment: Alignment.center,
+                    child: Flex(
+                      direction: Axis.vertical,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        if (isScanned != true)
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 5),
+                            child: SizedBox(
+                              width: 200,
+                              height: 200,
+                              child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    elevation: 3,
+                                    backgroundColor: clr_white,
                                   ),
-                                ),
-                              ],
-                            )),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      if (scan)
-                        Column(
-                          children: [
-                            SizedBox(
-                              child: GestureDetector(
-                                onTap: () {
-                                  qrCheck();
-                                },
-                                child: Container(
-                                  width: 200,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                      color: clr_white,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: const Center(
-                                    child: Text(
-                                      '섬 이름 확인',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
+                                  onPressed: () {
+                                    isScanned = true;
+                                    scanQR();
+                                  },
+                                  child: Row(
+                                    children: const [
+                                      Icon(
+                                        Icons.qr_code_scanner_rounded,
+                                        color: clr_black,
+                                        size: 45,
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Text(
+                                        'QR 스캔',
+                                        style: TextStyle(
+                                          fontSize: 28,
+                                          color: clr_black,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ],
+                                  )),
+                            ),
+                          ),
+                        const SizedBox(
+                          height: 30,
+                        ),
+                        if (isScanned)
+                          Column(
+                            children: [
+                              SizedBox(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    qrCheck();
+                                  },
+                                  child: Container(
+                                    width: 200,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                        color: clr_white,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Center(
+                                      child: Row(
+                                        children: const [
+                                          Icon(
+                                            Icons.qr_code_scanner_rounded,
+                                            color: clr_black,
+                                          ),
+                                          Text(
+                                            'QR 스캔',
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w700,
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            SizedBox(
-                              child: GestureDetector(
-                                onTap: () {
-                                  stampCheck();
-                                },
-                                child: Container(
-                                  width: 200,
-                                  height: 100,
-                                  decoration: BoxDecoration(
-                                      color: clr_white,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: const Center(
-                                    child: Text(
-                                      'QR 스탬프 전송',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
+                              SizedBox(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    qrCheck();
+                                  },
+                                  child: Container(
+                                    width: 200,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                        color: clr_white,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: const Center(
+                                      child: Text(
+                                        '섬 이름 확인',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Text('$_scanQR\n',
-                                style: const TextStyle(fontSize: 20)),
-                          ],
-                        )
-                    ],
-                  ),
-                );
-              },
-            )
-          ],
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              SizedBox(
+                                child: GestureDetector(
+                                  onTap: () {
+                                    stampCheck();
+                                  },
+                                  child: Container(
+                                    width: 200,
+                                    height: 100,
+                                    decoration: BoxDecoration(
+                                        color: clr_white,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: const Center(
+                                      child: Text(
+                                        'QR 스탬프 전송',
+                                        style: TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w700,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text('$_scanQR\n',
+                                  style: const TextStyle(fontSize: 20)),
+                            ],
+                          )
+                      ],
+                    ),
+                  );
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

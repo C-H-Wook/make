@@ -4,6 +4,7 @@ import 'package:makertone_proto_one/model/place_models.dart';
 class RecommendCard extends StatelessWidget {
   final PlaceInfo placeInfo;
   final VoidCallback press;
+
   const RecommendCard({
     required this.placeInfo,
     required this.press,

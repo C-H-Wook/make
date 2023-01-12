@@ -104,62 +104,12 @@ class _contractListState extends State<contractList> {
       ),
     ),
     Container(
-        child: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Signature(
-            controller: controller,
-            height: 250,
-            width: MediaQuery.of(context).size.width / 1.005,
-            backgroundColor: clr_skyblue,
-          ),
-          const SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    exportedImage = await controller.toPngBytes();
-                    setState(() {});
-                  },
-                  child: const Text("Save Signature"),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10),
-                child: ElevatedButton(
-                  onPressed: () {
-                    controller.clear();
-                  },
-                  child: const Text("Clear"),
-                ),
-              ),
-              const SizedBox(height: 10),
-              if (exportedImage != null)
-                Image.memory(
-                  exportedImage!,
-                  width: 300,
-                  height: 250,
-                ),
-              if (exportedImage != null)
-                ElevatedButton(
-                  onPressed: () {
-                    exportedImage = null;
-                    setState(() {});
-                  },
-                  child: const Text("Clear"),
-                ),
-            ],
-          )
-        ],
+      decoration: const BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/image/test1.png'),
+          fit: BoxFit.fill,
+        ),
       ),
-    )),
+    ),
   ];
 }

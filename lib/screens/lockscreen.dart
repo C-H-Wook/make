@@ -40,12 +40,12 @@ class _lockscreenState extends State<lockscreen> {
       body: Stack(
         clipBehavior: Clip.hardEdge,
         children: [
-          Hero(
-            tag: 1,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Image.asset(
-              'assets/image/icon_flag.png',
-              height: 500,
-              width: 200,
+              'assets/image/test1.png',
+              height: double.infinity,
+              width: double.infinity,
             ),
           ),
           Padding(
@@ -67,11 +67,13 @@ class _lockscreenState extends State<lockscreen> {
                 ),
                 TextFormField(
                   controller: passwordController,
+                  cursorColor: clr_incheonblue,
                   decoration: const InputDecoration(
-                      prefixIcon: Icon(
-                        Icons.key_rounded,
-                      ),
-                      hintText: 'Password'),
+                    prefixIcon: Icon(
+                      Icons.key_rounded,
+                    ),
+                    hintText: 'Password',
+                  ),
                 ),
                 const SizedBox(
                   height: 40,
