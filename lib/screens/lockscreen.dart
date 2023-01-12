@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:makertone_proto_one/screens/home_screen.dart';
 import 'package:makertone_proto_one/utilities/color.dart';
 
 class lockscreen extends StatefulWidget {
@@ -69,6 +70,13 @@ class _lockscreenState extends State<lockscreen> {
                   onTap: () {
                     login(emailController.text.toString(),
                         passwordController.text.toString());
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: ((context) => homeScreen(
+                              userID: emailController.text,
+                            )),
+                      ),
+                    );
                   },
                   child: Container(
                     height: 50,

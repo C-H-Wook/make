@@ -8,7 +8,11 @@ import 'package:makertone_proto_one/widgets/category_card.dart';
 import '../widgets/recommended_card.dart';
 
 class homeScreen extends StatefulWidget {
-  const homeScreen({super.key});
+  final String userID;
+  const homeScreen({
+    super.key,
+    required this.userID,
+  });
 
   @override
   State<homeScreen> createState() => _homeScreenState();
@@ -64,16 +68,16 @@ class _homeScreenState extends State<homeScreen> {
                       width: 15,
                     ),
                     RichText(
-                      text: const TextSpan(
-                          text: "안녕하세요",
-                          style: TextStyle(
+                      text: TextSpan(
+                          text: "안녕하세요\n",
+                          style: const TextStyle(
                             color: clr_white,
                             fontSize: 18,
                           ),
                           children: [
                             TextSpan(
-                              text: '  사용자님',
-                              style: TextStyle(
+                              text: widget.userID,
+                              style: const TextStyle(
                                 fontWeight: FontWeight.w700,
                                 fontSize: 18,
                               ),
