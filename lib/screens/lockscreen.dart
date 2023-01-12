@@ -40,28 +40,38 @@ class _lockscreenState extends State<lockscreen> {
       body: Stack(
         clipBehavior: Clip.hardEdge,
         children: [
-          Image.asset(
-            'assets/image/incheon_lock.jpg',
-            height: double.infinity,
-            width: double.infinity,
-            fit: BoxFit.cover,
+          Hero(
+            tag: 1,
+            child: Image.asset(
+              'assets/image/icon_flag.png',
+              height: 500,
+              width: 200,
+            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                const SizedBox(height: 150),
                 TextFormField(
                   controller: emailController,
-                  decoration: const InputDecoration(hintText: 'Email'),
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.account_circle,
+                      ),
+                      hintText: 'ID'),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
                 TextFormField(
                   controller: passwordController,
-                  decoration: const InputDecoration(hintText: 'Password'),
+                  decoration: const InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.key_rounded,
+                      ),
+                      hintText: 'Password'),
                 ),
                 const SizedBox(
                   height: 40,

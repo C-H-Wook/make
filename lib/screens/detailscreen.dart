@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:makertone_proto_one/model/place_models.dart';
-import 'package:makertone_proto_one/screens/contractList.dart';
 import 'package:makertone_proto_one/utilities/color.dart';
+
+import 'contractList.dart';
 
 class detailScreen extends StatefulWidget {
   final PlaceInfo placeInfo;
   final String userId;
+
   const detailScreen({
     super.key,
     required this.placeInfo,
@@ -19,6 +21,8 @@ class detailScreen extends StatefulWidget {
 class _detailScreenState extends State<detailScreen> {
   @override
   Widget build(BuildContext context) {
+    bool check = false;
+    print(check);
     return Scaffold(
         backgroundColor: clr_white,
         body: Stack(
@@ -26,7 +30,7 @@ class _detailScreenState extends State<detailScreen> {
             Image.asset(
               widget.placeInfo.image,
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.5, //Image Size
+              height: MediaQuery.of(context).size.height * 0.8, //Image Size
               fit: BoxFit.cover,
             ),
             SafeArea(
@@ -62,7 +66,7 @@ class _detailScreenState extends State<detailScreen> {
                               ),
                             ),
                           ),
-                        ),
+                        ), //Widget
                         Material(
                           elevation: 5,
                           borderRadius: BorderRadius.circular(100),
@@ -82,14 +86,14 @@ class _detailScreenState extends State<detailScreen> {
                               ),
                             ),
                           ),
-                        ),
+                        ), //Bookmark widget
                       ],
                     ),
                   ),
 
                   ///
                   SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.3,
+                    height: MediaQuery.of(context).size.height * 0.5,
                   ),
                   Expanded(
                     child: Container(
@@ -129,26 +133,56 @@ class _detailScreenState extends State<detailScreen> {
                                         ));
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
+                                    padding: const EdgeInsets.all(10.0),
                                     child: Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(50),
-                                        color: kPrimaryClr,
+                                        color: clr_white,
                                       ),
                                       width: double.infinity,
                                       height: 75,
                                       child: Column(
-                                        children: const [
-                                          SizedBox(
-                                            height: 25,
+                                        children: [
+                                          const SizedBox(
+                                            height: 35,
                                           ),
-                                          Text(
-                                            '서약서',
-                                            style: TextStyle(
-                                              color: clr_black,
-                                              fontSize: 25,
-                                              fontWeight: FontWeight.w700,
-                                            ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Icon(
+                                                Icons.library_books_outlined,
+                                                size: 35,
+                                              ),
+                                              const SizedBox(
+                                                width: 20,
+                                              ),
+                                              Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.end,
+                                                children: const [
+                                                  Text(
+                                                    '서약서',
+                                                    style: TextStyle(
+                                                      color: clr_black,
+                                                      fontSize: 25,
+                                                      fontWeight:
+                                                          FontWeight.w700,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: 20,
+                                                  ),
+                                                  Text('클릭',
+                                                      style: TextStyle(
+                                                        color: clr_black,
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w300,
+                                                      ))
+                                                ],
+                                              ),
+                                            ],
                                           ),
                                         ],
                                       ),
@@ -156,38 +190,44 @@ class _detailScreenState extends State<detailScreen> {
                                   ),
                                 ),
                                 const SizedBox(
-                                  height: 15,
+                                  height: 50,
                                 ),
-                                const Text(
-                                  "섬 설명:",
-                                  style: TextStyle(
-                                    color: clr_black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
+                                Row(
+                                  children: const [
+                                    Text(
+                                      "섬 설명",
+                                      style: TextStyle(
+                                        color: clr_black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 20,
+                                    ),
+                                    Icon(
+                                        Icons.keyboard_double_arrow_down_sharp),
+                                  ],
                                 ),
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Text(
-                                  widget.placeInfo.desc,
-                                  style: const TextStyle(
-                                    color: clr_black,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                  ),
-                                ),
+                                // Text(
+                                //   widget.placeInfo.desc,
+                                //   style: const TextStyle(
+                                //     color: clr_black,
+                                //     fontSize: 20,
+                                //     fontWeight: FontWeight.w700,
+                                //   ),
+                                // ),
                                 const Divider(
-                                  height: 5,
+                                  height: 3,
                                   color: clr_black,
                                 ),
                                 const SizedBox(
-                                  height: 10,
+                                  height: 20,
                                 ),
                                 Row(
                                   children: [
                                     const Text(
-                                      '추천 섬 채류일',
+                                      '추천하는 여행 기간',
                                       style: TextStyle(
                                         color: Colors.grey,
                                         fontSize: 20,

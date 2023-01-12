@@ -71,7 +71,9 @@ class _profileScreenState extends State<profileScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const RankScreen(),
+                  builder: (context) => RankScreen(
+                    userID: widget.userID,
+                  ),
                 ))
           },
         ),

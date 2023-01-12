@@ -41,7 +41,9 @@ class _homeScreenState extends State<homeScreen> {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const RankScreen(),
+                  builder: (context) => RankScreen(
+                    userID: widget.userID,
+                  ),
                 ))
           },
         ),
@@ -109,7 +111,7 @@ class _homeScreenState extends State<homeScreen> {
                     children: [
                       RichText(
                         text: const TextSpan(
-                          text: '큐레이션\n',
+                          text: '추천하는 인천 섬 Top 5\n',
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -117,7 +119,7 @@ class _homeScreenState extends State<homeScreen> {
                           ),
                           children: [
                             TextSpan(
-                              text: '일상을 특별하게 만들어줄 공간 가이드',
+                              text: '조용하고 색다른 나만의 장소',
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500,
@@ -129,7 +131,7 @@ class _homeScreenState extends State<homeScreen> {
                       Row(
                         children: const [
                           Text(
-                            '스크롤',
+                            '스크롤 ',
                             style: TextStyle(
                               fontSize: 13,
                               fontWeight: FontWeight.w300,
@@ -146,7 +148,7 @@ class _homeScreenState extends State<homeScreen> {
                   height: 30,
                 ),
                 SizedBox(
-                  height: 350,
+                  height: 370,
                   child: ListView.builder(
                     itemCount: places.length,
                     scrollDirection: Axis.horizontal,
@@ -155,17 +157,20 @@ class _homeScreenState extends State<homeScreen> {
                         padding: const EdgeInsets.only(left: 5, right: 30),
                         child: Row(
                           children: [
-                            RecommendCard(
-                              placeInfo: places[index],
-                              press: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => detailScreen(
-                                              placeInfo: places[index],
-                                              userId: widget.userID,
-                                            )));
-                              },
+                            ClipRRect(
+                              borderRadius: BorderRadius.circular(30),
+                              child: RecommendCard(
+                                placeInfo: places[index],
+                                press: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => detailScreen(
+                                                placeInfo: places[index],
+                                                userId: widget.userID,
+                                              )));
+                                },
+                              ),
                             ),
                           ],
                         ),

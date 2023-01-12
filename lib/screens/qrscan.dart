@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
@@ -11,9 +13,12 @@ class qrscan extends StatefulWidget {
 
 class _qrscanState extends State<qrscan> {
   String _scanQR = 'Unknown';
+  bool scan = false;
+
   @override
   void initState() {
     super.initState();
+    scan = false;
   }
 
   TextEditingController emailController = TextEditingController();
@@ -23,6 +28,7 @@ class _qrscanState extends State<qrscan> {
   String qrInfo = "users/addqrlog";
   String result = "";
   String result2 = "";
+  int stampcount = 0;
 
   Future<void> qrCheck() async {
     String userId = 'abc';
@@ -45,11 +51,21 @@ class _qrscanState extends State<qrscan> {
         print('failed');
         print(_scanQR);
       }
+      setState(() {
+        if (result == "01") {
+          _scanQR = "백령도";
+        } else if (result == "02") {
+          _scanQR = "무의도";
+        } else {
+          _scanQR = "UnKnown";
+        }
+      });
     } catch (e) {
       print(e.toString());
     }
   }
 
+  //qr 관련 섬정보 보내기
   Future<void> scanQR() async {
     String scanRes;
     try {
@@ -66,56 +82,204 @@ class _qrscanState extends State<qrscan> {
     });
   }
 
+//qr 개수세기
+  Future<void> stampCheck() async {
+    try {
+      final response = await http
+          .post(Uri.parse('http://54.83.101.17:8080/users/qrcounts'), body: {
+        'user_id': "abc",
+      });
+      print(response.statusCode);
+      print(response.body);
+      setState(() {
+        stampcount = int.parse(response.body);
+      });
+
+      if (response.statusCode == 200 || response.statusCode == 302) {
+        //var data = jsonDecode(response.body.toString());
+        //print(data['token']);
+        print('Login successfully');
+        print(_scanQR);
+      } else {
+        print('failed');
+        print(_scanQR);
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('QR SCAN'),
-          backgroundColor: clr_incheonblue,
+          title: const Text(
+            'QR SCAN',
+            style: TextStyle(
+              color: clr_black,
+            ),
+          ),
+          backgroundColor: clr_white,
         ),
-        body: Builder(
-          builder: (BuildContext context) {
-            return Container(
-              alignment: Alignment.center,
-              child: Flex(
-                direction: Axis.vertical,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: clr_incheonblue,
+        body: Column(
+          children: [
+            const SizedBox(height: 220),
+            Builder(
+              builder: (BuildContext context) {
+                return Container(
+                  decoration: const BoxDecoration(
+                    color: clr_white,
+                  ),
+                  alignment: Alignment.center,
+                  child: Flex(
+                    direction: Axis.vertical,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        width: 200,
+                        height: 100,
+                        child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              backgroundColor: clr_white,
+                            ),
+                            onPressed: () {
+                              scan = true;
+                              scanQR();
+                            },
+                            child: Row(
+                              children: const [
+                                Icon(
+                                  Icons.qr_code_scanner_rounded,
+                                  color: clr_black,
+                                ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  'QR 스캔',
+                                  style: TextStyle(
+                                    fontSize: 20,
+                                    color: clr_black,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            )),
                       ),
-                      onPressed: () => scanQR(),
-                      child: const Text('QR scan')),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      qrCheck();
-                    },
-                    child: Container(
-                      width: 100,
-                      height: 50,
-                      decoration: BoxDecoration(
-                          color: Colors.blue,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: const Center(
-                        child: Text('qrcheck'),
+                      const SizedBox(
+                        height: 30,
                       ),
-                    ),
+                      if (scan)
+                        Column(
+                          children: [
+                            SizedBox(
+                              child: GestureDetector(
+                                onTap: () {
+                                  qrCheck();
+                                },
+                                child: Container(
+                                  width: 200,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                      color: clr_white,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      '섬 이름 확인',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            SizedBox(
+                              child: GestureDetector(
+                                onTap: () {
+                                  stampCheck();
+                                },
+                                child: Container(
+                                  width: 200,
+                                  height: 100,
+                                  decoration: BoxDecoration(
+                                      color: clr_white,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: const Center(
+                                    child: Text(
+                                      'QR 스탬프 전송',
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Text('$_scanQR\n',
+                                style: const TextStyle(fontSize: 20)),
+                          ],
+                        )
+                    ],
                   ),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Text('Scan result : $_scanQR\n',
-                      style: const TextStyle(fontSize: 20))
-                ],
-              ),
-            );
-          },
+                );
+              },
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  GestureDetector newMethod2() {
+    return GestureDetector(
+      onTap: () {
+        stampCheck();
+      },
+      child: Container(
+        width: 200,
+        height: 100,
+        decoration: BoxDecoration(
+            color: clr_white, borderRadius: BorderRadius.circular(10)),
+        child: const Center(
+          child: Text(
+            'QR 스탬프 전송',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  GestureDetector newMethod() {
+    return GestureDetector(
+      onTap: () {
+        qrCheck();
+      },
+      child: Container(
+        width: 200,
+        height: 100,
+        decoration: BoxDecoration(
+            color: clr_white, borderRadius: BorderRadius.circular(10)),
+        child: const Center(
+          child: Text(
+            '섬 이름 확인',
+            style: TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
         ),
       ),
     );

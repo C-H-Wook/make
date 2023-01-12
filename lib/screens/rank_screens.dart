@@ -1,33 +1,62 @@
 import 'package:flutter/material.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:makertone_proto_one/screens/home_screen.dart';
+import 'package:makertone_proto_one/screens/profile_screen.dart';
 import 'package:makertone_proto_one/utilities/color.dart';
 import '../widgets/rankingcontainer.dart';
 import '../widgets/rankingcontainer2.dart';
 import '../widgets/rankingmedal.dart';
 
-class RankScreen extends StatelessWidget {
-  const RankScreen({super.key});
+class RankScreen extends StatefulWidget {
+  final String userID;
+  const RankScreen({
+    super.key,
+    required this.userID,
+  });
 
+  @override
+  State<RankScreen> createState() => _RankScreenState();
+}
+
+class _RankScreenState extends State<RankScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffdbf0f9),
-      appBar: AppBar(
-        backgroundColor: clr_white,
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
-            Icon(
-              Icons.segment_outlined,
-            ),
-            Text(
-              "Ranking",
-            ),
-            Icon(
-              Icons.share_outlined,
-            ),
-          ],
+      backgroundColor: clr_white,
+      bottomNavigationBar: GNav(tabs: [
+        GButton(
+          icon: Icons.home,
+          text: 'Home',
+          onPressed: () => {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => homeScreen(userID: widget.userID))),
+          },
         ),
-      ),
+        const GButton(
+          icon: Icons.add_location_outlined,
+          text: 'Location',
+        ),
+        const GButton(
+          icon: Icons.align_vertical_bottom_rounded,
+          text: 'Ranking',
+        ),
+        GButton(
+          icon: Icons.account_circle_outlined,
+          text: 'Profile',
+          onPressed: () => {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => profileScreen(
+                  userID: widget.userID,
+                ),
+              ),
+            )
+          },
+        ),
+      ]),
       body: Stack(
         children: [
           Row(

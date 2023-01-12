@@ -22,6 +22,7 @@ class RecommendCard extends StatelessWidget {
           width: 280,
           decoration: BoxDecoration(
             image: DecorationImage(
+              alignment: const AlignmentDirectional(-1, 0),
               image: AssetImage(placeInfo.image),
               fit: BoxFit.cover,
             ),
