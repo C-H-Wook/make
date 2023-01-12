@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:makertone_proto_one/screens/lockscreen.dart';
+import 'package:makertone_proto_one/services/api_service.dart';
 
 void main() {
+  ApiService().getUserInfo();
   runApp(const MyApp());
 }
 
