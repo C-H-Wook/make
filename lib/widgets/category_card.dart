@@ -25,16 +25,17 @@ class category_card extends StatelessWidget {
           borderRadius: BorderRadius.circular(100),
           child: Container(
             height: 70,
-            width: 180,
+            width: 300,
             decoration: BoxDecoration(
               color: clr_white,
               borderRadius: BorderRadius.circular(100),
             ),
             child: Padding(
               padding: const EdgeInsets.symmetric(
-                horizontal: 8,
+                horizontal: 10,
               ),
-              child: Row(children: [
+              child:
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                 CircleAvatar(
                   backgroundImage: AssetImage(image),
                 ),
