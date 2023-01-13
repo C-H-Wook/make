@@ -1,11 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:liquid_swipe/liquid_swipe.dart';
 import 'package:makertone_proto_one/model/place_models.dart';
+import 'package:makertone_proto_one/screens/signScreen.dart';
 import 'package:makertone_proto_one/utilities/color.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:signature/signature.dart';
 
 class contractList extends StatefulWidget {
   final PlaceInfo placeInfo;
@@ -27,12 +26,6 @@ class _contractListState extends State<contractList> {
   final String baseUrl = "http://54.83.101.17:8080";
   final String getInfo = "users";
   final String postInfo = "users/addpleges";
-  Uint8List? exportedImage;
-  SignatureController controller = SignatureController(
-    penStrokeWidth: 3,
-    penColor: Colors.red,
-    exportBackgroundColor: Colors.yellow,
-  );
 
   Future<void> contractCheck() async {
     try {
@@ -77,6 +70,7 @@ class _contractListState extends State<contractList> {
                 Icons.arrow_back_ios,
                 size: 35,
               ),
+
               positionSlideIcon: 0.5,
               waveType: WaveType.liquidReveal,
               enableLoop: false,
@@ -103,11 +97,14 @@ class _contractListState extends State<contractList> {
         ),
       ),
     ),
-    Container(
-      decoration: const BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('assets/image/test1.png'),
-          fit: BoxFit.fill,
+    GestureDetector(
+      onDoubleTap: () => Navigator.push(
+          context, MaterialPageRoute(builder: (context) => const signScreen())),
+      child: const Text(
+        "서명을 위해 더블탭 해주세요!",
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
         ),
       ),
     ),

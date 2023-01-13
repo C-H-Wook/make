@@ -9,6 +9,8 @@ import 'package:makertone_proto_one/utilities/color.dart';
 import 'package:makertone_proto_one/widgets/category_card.dart';
 import 'package:makertone_proto_one/widgets/recommended_card.dart';
 
+import 'locationScreen.dart';
+
 class homeScreen extends StatefulWidget {
   final String userID;
   const homeScreen({
@@ -30,9 +32,16 @@ class _homeScreenState extends State<homeScreen> {
           icon: Icons.home,
           text: 'Home',
         ),
-        const GButton(
+        GButton(
           icon: Icons.add_location_outlined,
           text: 'Location',
+          onPressed: () => {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const locationScreen(),
+                )),
+          },
         ),
         GButton(
           icon: Icons.align_vertical_bottom_rounded,

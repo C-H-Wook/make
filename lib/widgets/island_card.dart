@@ -38,7 +38,7 @@ class islandCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       image: DecorationImage(
                         alignment: const AlignmentDirectional(-1, 0),
-                        image: AssetImage(placeInfo.image),
+                        image: AssetImage(placeInfo.qr2),
                         fit: BoxFit.cover,
                       ),
                     ),
